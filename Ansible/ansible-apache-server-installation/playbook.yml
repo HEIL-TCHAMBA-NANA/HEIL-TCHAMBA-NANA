@@ -1,0 +1,21 @@
+---
+- name: Configurer les serveurs Ubuntu
+  hosts: all  # Appliquer cette configuration à tous les hôtes définis dans l'inventaire
+  become: yes  # Exécuter les tâches avec des privilèges administratifs (sudo)
+
+  tasks:
+    - name: Mettre à jour les paquets
+      apt:  # Utiliser le gestionnaire de paquets APT pour gérer les paquets sur les systèmes basés sur Debian/Ubuntu
+        update_cache: yes  # Mettre à jour le cache des paquets
+        upgrade: dist  # Mettre à niveau les paquets vers la dernière version disponible
+
+    - name: Installer Apache
+      apt:  # Utiliser APT pour installer le paquet apache2
+        name: apache2  # Nom du paquet à installer
+        state: present  # S'assurer que le paquet apache2 est installé
+
+    - name: Démarrer et activer Apache
+      service:  # Utiliser le module service pour gérer les services système
+        name: apache2  # Nom du service à gérer (Apache dans ce cas)
+        state: started  # S'assurer que le service est démarré
+        enabled: yes  # S'assurer que le service Apache démarre automatiquement au démarrage du système

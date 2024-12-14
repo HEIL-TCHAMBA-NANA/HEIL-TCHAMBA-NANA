@@ -1,0 +1,11 @@
+all:
+  hosts:
+    vm-serveur:
+      ansible_host: 192.168.29.1
+      ansible_user: heil
+    vm-serveur2:
+      ansible_host: 192.168.29.3
+      ansible_user: heil1
+    vm-serveur3:
+      ansible_host: 192.168.29.4
+      ansible_user: heilton

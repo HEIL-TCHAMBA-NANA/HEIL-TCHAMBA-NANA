@@ -1,0 +1,13 @@
+
+PLAY [Gestion des utilisateurs et des permissions] *****************************
+
+TASK [Gathering Facts] *********************************************************
+fatal: [vm-serveur2]: FAILED! => {"msg": "Missing sudo password"}
+fatal: [vm-serveur3]: FAILED! => {"msg": "Missing sudo password"}
+fatal: [vm-serveur]: FAILED! => {"msg": "Missing sudo password"}
+
+PLAY RECAP *********************************************************************
+vm-serveur                 : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+vm-serveur2                : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+vm-serveur3                : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+

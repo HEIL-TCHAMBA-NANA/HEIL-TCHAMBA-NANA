@@ -1,0 +1,30 @@
+---
+- name: Gestion des utilisateurs et des permissions  # Nom du playbook
+  hosts: all  # Cible tous les serveurs définis dans l'inventaire
+  become: true  # Exécute les tâches avec des privilèges sudo
+
+  tasks:
+    - name: Créer un utilisateur  # Tâche pour créer un nouvel utilisateur
+      ansible.builtin.user:  # Utilise le module user d'Ansible
+        name: johndoe  # Nom de l'utilisateur à créer
+        state: present  # S'assure que l'utilisateur existe
+        shell: /bin/bash  # Définit le shell par défaut de l'utilisateur
+
+    - name: Définir un mot de passe pour l'utilisateur  # Tâche pour définir un mot de passe
+      ansible.builtin.user:  # Utilise le module user d'Ansible
+        name: johndoe  # Nom de l'utilisateur pour lequel le mot de passe est défini
+        password: "{{ 'password123' | password_hash('sha512') }}"  # Génère un mot de passe haché avec SHA-512
+
+    - name: Ajouter l'utilisateur à un groupe  # Tâche pour ajouter l'utilisateur à un groupe
+      ansible.builtin.user:  # Utilise le module user d'Ansible
+        name: johndoe  # Nom de l'utilisateur
+        groups: sudo  # Ajoute l'utilisateur au groupe sudo
+        append: true  # Ne supprime pas les autres groupes de l'utilisateur
+
+    - name: Créer un répertoire pour l'utilisateur  # Tâche pour créer un répertoire personnel
+      ansible.builtin.file:  # Utilise le module file d'Ansible
+        path: /home/johndoe/mydir  # Chemin du répertoire à créer
+        state: directory  # Indique que l'élément doit être un répertoire
+        owner: johndoe  # Définit johndoe comme propriétaire du répertoire
+        group: johndoe  # Définit johndoe comme groupe propriétaire
+        mode: '0755'  # Définit les permissions
